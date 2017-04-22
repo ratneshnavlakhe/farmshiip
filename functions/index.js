@@ -20,12 +20,14 @@ exports.addRobot = functions.https.onRequest((req, res) => {
   // Grab the text parameter.
   const original = req.query.text;
   // Push it into the Realtime Database then send a response
-  admin.database().ref('/messages').push({original: original}).then(snapshot => {
-    // Redirect with 303 SEE OTHER to the URL of the pushed object in the Firebase console.
+  // admin.database().ref('/messages').push({original: original}).then(snapshot => {
+  //   // Redirect with 303 SEE OTHER to the URL of the pushed object in the Firebase console.
+  //   res.redirect(303, snapshot.ref);
+  // });
+  admin.database().ref('/robot').then(snapshot => {
+    console.log(snapshot);
     res.redirect(303, snapshot.ref);
   });
-  console.log(admin.database().ref('/robot'));
-  return;
 });
 
 
